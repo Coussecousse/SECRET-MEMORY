@@ -20,5 +20,6 @@ body {
 }
 
 .timer__counter {
+    letter-spacing: .4rem;
     color: #4B4D4E;
 }
