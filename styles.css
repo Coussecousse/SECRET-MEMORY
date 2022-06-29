@@ -18,3 +18,7 @@ h1 {
 body {
     background: url("img/illustration-low-poly-symmetry-green-blue-triangle-73889-wallhere.com.jpg")no-repeat;
 }
+
+.timer__counter {
+    color: #4B4D4E;
+}

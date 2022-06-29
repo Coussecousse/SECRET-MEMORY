@@ -28,14 +28,14 @@
       <div class="container-md text-white">
         <div class="row d-flex justify-content-evenly">
           <h1
-            class="col-lg-4 fw-bold d-flex justify-content-center"
-            style="font-size: clamp(2rem, 6vw, 4rem)"
+            class="col-md-6 col-lg-4 fw-bold d-flex justify-content-center"
+            style="font-size: clamp(3rem, 6vw, 4rem)"
           >
             MEMORY
           </h1>
           <a
             href=""
-            class="col-6 col-md-3 col-lg-2 align-items-center fs-5 shadow rounded text-white d-flex justify-content-center p-2 align-self-center text-decoration-none"
+            class="col-6 col-md-3 col-lg-2 align-items-center fs-5 shadow rounded text-white d-flex justify-content-center p-2 m-1 align-self-center text-decoration-none"
             id="play-again"
             style="height: 50px"
             >Rejouer<i class="fa-solid fa-rotate ps-3 pt-1"></i
@@ -44,11 +44,13 @@
       </div>
     </header>
     <main>
-      <div class="timer">
-        <div class="timer__container">
-          <div class="container__bg"></div>
+      <div class="timer container d-flex justify-content-center" style="height: 80px;">
+        <div class="d-flex justify-content-center row-t w-100">
+          <div class="progress col-6 align-self-center" style="height:15px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="timer__counter fs-1 align-self-center ms-5">2:30</div>
         </div>
-        <div class="timer__counter"></div>
       </div>
       <div class="game">
         <a href="#" class="cards">
