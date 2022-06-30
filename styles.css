@@ -24,10 +24,43 @@ body {
 .timer__counter {
     letter-spacing: .4rem;
     color: #4B4D4E;
-    text-shadow: 0px 6px 6px rgba(0,0,0,0.32);;
+    text-shadow: 0px 6px 6px rgba(0,0,0,0.32);
 }
 .cards {
     background: white;
     height: 200px;
+    margin: 0;
+    /* transform-style: preserve-3d; */
 }
 
+.back {
+    color: white;
+    background: #4B4D4E;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(1rem, 8vw, 1.5rem);
+    position: relative;
+    z-index: -1;
+    bottom:100%;
+    transform: rotateY(180deg);
+    transition: all .6s;
+}
+.front{
+    z-index: 1;
+}
+
+#lala, #lala2 {
+    position: relative;
+}
+footer {
+    background: #4B4D4E;
+    height: 50px;
+    color: #959697;
+}
+
+.flipper {
+    transform: rotateY(-180deg);
+}
+/* .cards:hover {
+    transform: rotateY(180deg);
+    transition: transform .6s;
+} */
