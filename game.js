@@ -1,4 +1,8 @@
 const cards         = document.querySelectorAll('.cards');
+const themes        = [ocean, savane, ferme];
+const ocean         = ['Hyppocampe', 'Hyppocampe', 'Poisson Clown','Poisson Clown', 'Pieuvre', 'Pieuvre', 'Requin', 'Requin', 'Baleine', 'Baleine','Tortue', 'Tortue'];
+const savane        = ['Lion', 'Lion', 'Girafe', 'Girafe', 'Zèbre', 'Zèbre', 'Éléphant', 'Éléphant', 'Chimpanzé', 'Chimpanzé', 'Hippopotame', 'Hippopotame'];
+const ferme         = ['Vache', 'Vache', 'Poule', 'Poule', 'Chien', 'Chien', 'Mouton', 'Mouton', 'Cochon', 'Cochon', 'Cheval', 'Cheval']
 //Ce que je dois faire : 
 //_____1_____
 //Un event listener sur les cards. Quand ça clique : 
@@ -6,13 +10,15 @@ const cards         = document.querySelectorAll('.cards');
 cards.forEach(card => {
     card.addEventListener('click', () => {
         //  Retourne la carte
-        // Ajoute une class flipper ?
         let front = card.querySelector('.front');
         let back  = card.querySelector('.back');
         front.classList.add('flipper-front');
         back.classList.add('flipper-back');
     })
 })
+function SelectTheme() {
+    return
+}
 //_____2_____
 //Une liste avec le nom des animaux -> 6 paires d'animaux. Exemple liste ['girafe', 'girafe', 'zèbre', 'zèbre'] -> A chaque fois deux fois les animaux
 //Prendre les cartes une par une et tirer au sort dans la liste le nom de l'animal inscrit sur la carte puis enlève l'animal de la liste 
@@ -30,3 +36,6 @@ cards.forEach(card => {
 
 //____5_____
 //Si le jeu est gagné, le timer est arrêté, "BRAVO" s'affiche, et on peut juste appuyer sur rejouer
+
+//____6_____
+//Fonction rejouer
