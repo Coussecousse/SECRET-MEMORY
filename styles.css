@@ -56,31 +56,50 @@ footer {
 /* Pour retourner :  */
 .flipper-front-on {
     z-index: -1;
-    animation: rotatefront .6s ease-in-out;
+    animation: rotatefront-on .6s ease-in-out;
     transition: z-index .8s ease-in-out;
 }
 .flipper-back-on {
     z-index: 1;
-    animation: rotateback .6s ease-in-out;
+    animation: rotateback-on .6s ease-in-out;
     transition: z-index .8s ease-in-out;
 }
 .flipper-front-off {
-
+    z-index: 1;
+    animation: rotatefront-off .6s ease-in-out;
+    transition: z-index .8s ease-in-out;
 }
-.flipper-back-off {
-
+.fripper-back-off {
+    z-index: -1;
+    animation: rotateback-off .6s ease-in-out;
+    transition: z-index .8s ease-in-out;
 }
-@keyframes rotatefront {
+
+@keyframes rotatefront-on {
     from {
         transform: rotateY(-180deg);
     } to {
         transform: rotateY(0deg);
     }
 }
-@keyframes rotateback {
+@keyframes rotateback-on {
     from {
         transform: rotateY(180deg);
     } to {
         transform: rotateY(0deg);
+    }
+}
+@keyframes rotatefront-off {
+    from {
+        transform: rotateY(0deg);
+    } to {
+        transform: rotateY(-180deg);
+    }
+}
+@keyframes rotateback-off {
+    from {
+        transform: rotateY(0deg);
+    } to {
+        transform: rotateY(180deg);
     }
 }
