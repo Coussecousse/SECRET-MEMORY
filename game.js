@@ -1,23 +1,37 @@
 const cards         = document.querySelectorAll('.cards');
-const themes        = [ocean, savane, ferme];
 const ocean         = ['Hyppocampe', 'Hyppocampe', 'Poisson Clown','Poisson Clown', 'Pieuvre', 'Pieuvre', 'Requin', 'Requin', 'Baleine', 'Baleine','Tortue', 'Tortue'];
 const savane        = ['Lion', 'Lion', 'Girafe', 'Girafe', 'Zèbre', 'Zèbre', 'Éléphant', 'Éléphant', 'Chimpanzé', 'Chimpanzé', 'Hippopotame', 'Hippopotame'];
 const ferme         = ['Vache', 'Vache', 'Poule', 'Poule', 'Chien', 'Chien', 'Mouton', 'Mouton', 'Cochon', 'Cochon', 'Cheval', 'Cheval']
+const themes        = [ocean, savane, ferme];
 //Ce que je dois faire : 
 //_____1_____
 //Un event listener sur les cards. Quand ça clique : 
 //Retourne la carte 
+
+//Distribution des cartes au tout début !
+CardsDistribution();
 cards.forEach(card => {
     card.addEventListener('click', () => {
         //  Retourne la carte
         let front = card.querySelector('.front');
         let back  = card.querySelector('.back');
-        front.classList.add('flipper-front');
-        back.classList.add('flipper-back');
+        front.classList.add('flipper-front-on');
+        back.classList.add('flipper-back-on');
     })
 })
 function SelectTheme() {
-    return
+    return Math.floor(Math.random() * (themes.length));
+}
+function CardsDistribution() {
+    let theme = SelectTheme();
+    theme     = themes[theme];
+    let cloneTheme   = [...theme];
+    cards.forEach(card => {
+        let index        = Math.floor(Math.random() * (cloneTheme.length));
+        let back         = card.querySelector('.back');
+        back.innerText   = cloneTheme[index];
+        cloneTheme.splice(index, 1);
+    })
 }
 //_____2_____
 //Une liste avec le nom des animaux -> 6 paires d'animaux. Exemple liste ['girafe', 'girafe', 'zèbre', 'zèbre'] -> A chaque fois deux fois les animaux

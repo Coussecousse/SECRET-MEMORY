@@ -30,7 +30,7 @@ body {
 .cards {
     height: 200px;
     margin: 0;
-    /* transform: preserve-3D; */
+    cursor: pointer;
 }
 
 .back {
@@ -54,17 +54,22 @@ footer {
     color: #959697;
 }
 /* Pour retourner :  */
-.flipper-front {
+.flipper-front-on {
     z-index: -1;
     animation: rotatefront .6s ease-in-out;
     transition: z-index .8s ease-in-out;
 }
-.flipper-back {
+.flipper-back-on {
     z-index: 1;
     animation: rotateback .6s ease-in-out;
     transition: z-index .8s ease-in-out;
 }
+.flipper-front-off {
 
+}
+.flipper-back-off {
+
+}
 @keyframes rotatefront {
     from {
         transform: rotateY(-180deg);
