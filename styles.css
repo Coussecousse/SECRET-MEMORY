@@ -42,9 +42,10 @@ body {
     font-size: clamp(1rem, 8vw, 1.5rem);
     position: relative;
     bottom:100%;
+    z-index: -1;
 }
 .front{
-    z-index: 2;
+    z-index: 1;
     position: relative;
     background-color: white;
     backface-visibility: hidden;
@@ -103,5 +104,16 @@ footer {
         transform: rotateY(0deg);
     } to {
         transform: rotateY(180deg);
+    }
+}
+.valid {
+    animation: valid .5s alternate ease-in-out;
+}
+@keyframes valid {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10px);
     }
 }

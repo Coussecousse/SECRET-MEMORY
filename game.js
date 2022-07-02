@@ -1,4 +1,4 @@
-const cards         = document.querySelectorAll('.cards');
+let cards         = document.querySelectorAll('.cards');
 const ocean         = ['Hyppocampe', 'Hyppocampe', 'Poisson Clown','Poisson Clown', 'Pieuvre', 'Pieuvre', 'Requin', 'Requin', 'Baleine', 'Baleine','Tortue', 'Tortue'];
 const savane        = ['Lion', 'Lion', 'Girafe', 'Girafe', 'Zèbre', 'Zèbre', 'Éléphant', 'Éléphant', 'Chimpanzé', 'Chimpanzé', 'Hippopotame', 'Hippopotame'];
 const ferme         = ['Vache', 'Vache', 'Poule', 'Poule', 'Chien', 'Chien', 'Mouton', 'Mouton', 'Cochon', 'Cochon', 'Cheval', 'Cheval']
@@ -29,13 +29,16 @@ function VerifierCartes(card){
             let firstCard  = listCards[0];
             let secondCard = listCards[1];
             if (firstCard.dataset.animal === secondCard.dataset.animal) {
-                console.log("je passe ici")
+                listCards.forEach(card => {
+                    card.classList.add('valid');
+                    setTimeout(() => {card.classList.add("border", "border-success", "border-3");}, 1000)
+                   
+                })
                 //Carte en vert
                 //Remettre vide listCards
             } else {
                 //Carte en rouge, petite animation de droite à gauche
                 //Retourner les deux cartes 
-                console.log("Je passe ici2")
                 firstCard.dataset.number = "";
                 listCards.forEach(card => {
                     setTimeout(TurnCards, 1000,card);
@@ -67,7 +70,7 @@ function TurnCards(card){
 }
 
 function addFlippCards(front, back, add){
-    front.classList.add('flipper-front-'+add);
+    front.classList.add(('flipper-front-'+add));
     back.classList.add('flipper-back-'+add);
 }
 function removeFlippCards(front, back, remove) {
