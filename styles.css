@@ -31,6 +31,8 @@ body {
     height: 200px;
     margin: 0;
     cursor: pointer;
+    transform-style: preserve-3d;
+
 }
 
 .back {
@@ -39,13 +41,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: clamp(1rem, 8vw, 1.5rem);
     position: relative;
-    z-index: -1;
     bottom:100%;
 }
 .front{
-    z-index: 1;
+    z-index: 2;
     position: relative;
     background-color: white;
+    backface-visibility: hidden;
 }
 
 footer {
@@ -55,31 +57,31 @@ footer {
 }
 /* Pour retourner :  */
 .flipper-front-on {
-    z-index: -1;
+    z-index: -1; 
     animation: rotatefront-on .6s ease-in-out;
-    transition: z-index .8s ease-in-out;
+    transition: z-index .7s ease-in-out; 
 }
 .flipper-back-on {
     z-index: 1;
     animation: rotateback-on .6s ease-in-out;
-    transition: z-index .8s ease-in-out;
+    transition: z-index .7s ease-in-out; 
 }
 .flipper-front-off {
     z-index: 1;
     animation: rotatefront-off .6s ease-in-out;
-    transition: z-index .8s ease-in-out;
+    transition: z-index .7s ease-in-out;
 }
-.fripper-back-off {
+.flipper-back-off {
     z-index: -1;
     animation: rotateback-off .6s ease-in-out;
-    transition: z-index .8s ease-in-out;
+    transition: z-index .4s ease-in-out;
 }
 
 @keyframes rotatefront-on {
     from {
-        transform: rotateY(-180deg);
-    } to {
         transform: rotateY(0deg);
+    } to {
+        transform: rotateY(-180deg);
     }
 }
 @keyframes rotateback-on {
@@ -91,9 +93,9 @@ footer {
 }
 @keyframes rotatefront-off {
     from {
-        transform: rotateY(0deg);
-    } to {
         transform: rotateY(-180deg);
+    } to {
+        transform: rotateY(0deg);
     }
 }
 @keyframes rotateback-off {

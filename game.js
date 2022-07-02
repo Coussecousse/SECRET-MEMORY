@@ -13,13 +13,7 @@ CardsDistribution();
 cards.forEach(card => {
     card.addEventListener('click', () => {
         //  Retourne la carte
-        let front = card.querySelector('.front');
-        let back  = card.querySelector('.back');
-
-        front.classList.add('flipper-front-on');
-        back.classList.add('flipper-back-on');
-        //Verification des cartes:
-        //Récupérer le nom de la data
+        TurnCards(card);
         VerifierCartes(card);
     })
 })
@@ -42,10 +36,10 @@ function VerifierCartes(card){
                 //Carte en rouge, petite animation de droite à gauche
                 //Retourner les deux cartes 
                 console.log("Je passe ici2")
+                firstCard.dataset.number = "";
                 listCards.forEach(card => {
-                    let front = card.querySelector('.front');
-                    let back  = card.querySelector('.back');
-                    setTimeout(TurnCards, 1000,front, back);
+                    setTimeout(TurnCards, 1000,card);
+                    //  Je dois empêcher qu'on puisse retourner d'autres cartes.
                 })
             listCards = [];
         }
@@ -54,17 +48,29 @@ function VerifierCartes(card){
     }
 }
 
-function TurnCards(front, back){
-    front.classList.remove('flipper-front-on');
-    back.classList.remove('flipper-back-on');
-    front.classList.add('flipper-front-off');
-    back.classList.add('flipper-back-off');
-}
-
-function getFrontAndBack(card){
+function TurnCards(card){
     let front = card.querySelector('.front');
     let back  = card.querySelector('.back');
+    if (front.classList.contains('flipper-front-off')){
+        // Passer le front devant
+        front.classList.remove('flipper-front-off');
+        back.classList.remove('flipper-back-off');
+        front.classList.add('flipper-front-on');
+        back.classList.add('flipper-back-on');
+    } else if (front.classList.contains('flipper-front-on')){
+        console.log('Je passe ici 1')
+        // Si est en position front (pour passer le back devant)
+        front.classList.remove('flipper-front-on');
+        back.classList.remove('flipper-back-on');
+        front.classList.add('flipper-front-off');
+        back.classList.add('flipper-back-off');
+    } else {
+        // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes : 
+        front.classList.add('flipper-front-on');
+        back.classList.add('flipper-back-on')
+    }
 }
+
 
 function SelectTheme() {
     return Math.floor(Math.random() * (themes.length));
