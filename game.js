@@ -53,24 +53,27 @@ function TurnCards(card){
     let back  = card.querySelector('.back');
     if (front.classList.contains('flipper-front-off')){
         // Passer le front devant
-        front.classList.remove('flipper-front-off');
-        back.classList.remove('flipper-back-off');
-        front.classList.add('flipper-front-on');
-        back.classList.add('flipper-back-on');
+        addFlippCards(front, back, 'on');
+        removeFlippCards(front, back, 'off');
     } else if (front.classList.contains('flipper-front-on')){
         console.log('Je passe ici 1')
         // Si est en position front (pour passer le back devant)
-        front.classList.remove('flipper-front-on');
-        back.classList.remove('flipper-back-on');
-        front.classList.add('flipper-front-off');
-        back.classList.add('flipper-back-off');
+        addFlippCards(front, back, 'off');
+        removeFlippCards(front, back, 'on');
     } else {
         // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes : 
-        front.classList.add('flipper-front-on');
-        back.classList.add('flipper-back-on')
+        addFlippCards(front, back, 'on');
     }
 }
 
+function addFlippCards(front, back, add){
+    front.classList.add('flipper-front-'+add);
+    back.classList.add('flipper-back-'+add);
+}
+function removeFlippCards(front, back, remove) {
+    front.classList.remove('flipper-front-'+remove);
+    back.classList.remove('flipper-back-'+remove);
+}
 
 function SelectTheme() {
     return Math.floor(Math.random() * (themes.length));
