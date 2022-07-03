@@ -30,23 +30,23 @@ function VerifierCartes(card){
             let secondCard = listCards[1];
             if (firstCard.dataset.animal === secondCard.dataset.animal) {
                 listCards.forEach(card => {
-                    card.classList.add('valid');
-                    setTimeout(() => {card.classList.add("border", "border-success", "border-3");}, 1000)
-                   
+                    setTimeout(()=> {card.classList.add('valid')}, 500);
+                    setTimeout(() => {card.children[1].classList.add("border", "border-success", "border-2");}, 800);
                 })
-                //Carte en vert
                 //Remettre vide listCards
             } else {
                 //Carte en rouge, petite animation de droite à gauche
                 //Retourner les deux cartes 
                 firstCard.dataset.number = "";
                 listCards.forEach(card => {
+                    setTimeout(()=> {card.classList.add('unvalid')}, 500);
                     setTimeout(TurnCards, 1000,card);
                     //  Je dois empêcher qu'on puisse retourner d'autres cartes.
                 })
+            }
             listCards = [];
-        }
-        console.log("Après le retournement" + listCards);
+        
+            console.log("Après le retournement" + listCards);
         }
     }
 }
@@ -59,10 +59,10 @@ function TurnCards(card){
         addFlippCards(front, back, 'on');
         removeFlippCards(front, back, 'off');
     } else if (front.classList.contains('flipper-front-on')){
-        console.log('Je passe ici 1')
         // Si est en position front (pour passer le back devant)
         addFlippCards(front, back, 'off');
         removeFlippCards(front, back, 'on');
+        card.classList.remove('unvalid');
     } else {
         // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes : 
         addFlippCards(front, back, 'on');
