@@ -140,3 +140,19 @@ footer {
         transform: translate(0);
     }
 }
+.progress-bar {
+    width: 100%;
+}
+
+.timer-on {
+    animation: timer 60s !important;
+}
+
+@keyframes timer {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}

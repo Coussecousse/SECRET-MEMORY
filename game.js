@@ -8,8 +8,12 @@ const savane        = ['Lion', 'Lion', 'Girafe', 'Girafe', 'Zèbre', 'Zèbre', '
 const ferme         = ['Vache', 'Vache', 'Poule', 'Poule', 'Chien', 'Chien', 'Mouton', 'Mouton', 'Cochon', 'Cochon', 'Cheval', 'Cheval']
 const themes        = [ocean, savane, ferme];
 
+let firstCardClick  = true;
+
 let listCards       = [];
-let counter       = 0;
+let counter         = 60;
+const timer         = document.querySelector('.timer__counter');
+const timerProgress = document.querySelector('.progress-bar');
 //____________2__________Distribution des cartes au tout début :
 CardsDistribution();
 
@@ -39,8 +43,13 @@ function SelectTheme() {
 cards.forEach(card => {
     card.addEventListener('click', (e) => {
         // Prend les cartes
+        if (firstCardClick){
+            timerOn();
+            firstCardClick = false;
+        }
+        // Lance le timer : 
         GetCards(card);
-        if (listCards.length <= 2 && !card.classList.contains('valid')){
+        if (listCards.length <= 2 && !card.classList.contains('valid') && !card.children[0].classList.contains('flipper-front-on')){
             console.log('je passe ici');
             TurnCards(card);
             if (listCards.length == 2){
@@ -49,6 +58,14 @@ cards.forEach(card => {
         }
     })
 })
+function timerOn(){
+    timerProgress.classList.add('timer-on');
+    var timerInterval = setInterval(lessCounter, 1000);
+}
+function lessCounter() {
+    counter--;
+    timer.innerText = counter+'s';
+}
 function GetCards(card){
     if (listCards.length <= 2 && !card.classList.contains('valid')) {
         listCards.push(card);
@@ -89,7 +106,6 @@ function VerifierCartes(){
         listCards = [];
     }, 900);
 }
-    // return true;
 
 function TurnCards(card){
     let front = card.querySelector('.front');
