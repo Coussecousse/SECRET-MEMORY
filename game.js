@@ -11,71 +11,84 @@ CardsDistribution();
 
 //____________2__________Cartes qui se retournent :
 cards.forEach(card => {
-    card.addEventListener('click', () => {
-        //  Retourne la carte
-        TurnCards(card);
-        VerifierCartes(card);
+    card.addEventListener('click', (e) => {
+        // Prend les cartes
+        GetCards(card);
+        if (listCards.length <= 2 && !card.classList.contains('valid')){
+            console.log('je passe ici');
+            TurnCards(card);
+            if (listCards.length == 2){
+                VerifierCartes();
+            }
+        }
     })
 })
-function VerifierCartes(card){
-    listCards.push(card);
-    listCards[0].dataset.number = "one";
-    console.log(listCards)
-    if (listCards.length == 2) {
-        //  Si on appuie deux fois sur la même carte :
-        if (listCards[1].dataset.number == "one") {
+function GetCards(card){
+    if (listCards.length <= 2 && !card.classList.contains('valid')) {
+        listCards.push(card);
+        listCards[0].dataset.number = "one";
+    }
+    if (listCards.length == 2){
+        if (listCards[1].dataset.number == "one"){
             listCards.pop();
-        } else {
-            let firstCard  = listCards[0];
-            let secondCard = listCards[1];
-            if (firstCard.dataset.animal === secondCard.dataset.animal) {
-                listCards.forEach(card => {
-                    setTimeout(()=> {card.classList.add('valid')}, 500);
-                    setTimeout(() => {card.children[1].classList.add("border", "border-success", "border-2");}, 800);
-                })
-                //Remettre vide listCards
-            } else {
-                //Carte en rouge, petite animation de droite à gauche
-                //Retourner les deux cartes 
-                firstCard.dataset.number = "";
-                listCards.forEach(card => {
-                    setTimeout(()=> {card.classList.add('unvalid')}, 500);
-                    setTimeout(TurnCards, 1000,card);
-                    //  Je dois empêcher qu'on puisse retourner d'autres cartes.
-                })
-            }
-            listCards = [];
-        
-            console.log("Après le retournement" + listCards);
         }
     }
 }
+function VerifierCartes(){
+    let firstCard  = listCards[0];
+    let secondCard = listCards[1];
+    if (firstCard.dataset.animal === secondCard.dataset.animal) {
+        listCards.forEach(card => {
+            //  Animation carte bonne :
+            setTimeout(()=> {card.classList.add('valid')}, 500);
+            // Bordure ajoutée :
+            setTimeout(() => {card.children[1].classList.add("border", "border-success", "border-2");}, 800);
+        })
+    } else {
+        firstCard.dataset.number = "";
+        listCards.forEach(card => {
+            // Animation mauvaise carte :
+            setTimeout(()=> {
+                card.classList.add('unvalid')
+                card.children[1].classList.add('border', 'border-danger', 'border-2');
+            }, 500);
+
+            // Retourner les cartes : 
+            setTimeout(TurnCards, 1000,card);
+        })
+    }
+    //Empêche de pouvoir tourner d'autres cartes:
+    setTimeout(() => {
+        firstCard.dataset.number = ""
+        listCards = [];
+    }, 900);
+}
+    // return true;
 
 function TurnCards(card){
     let front = card.querySelector('.front');
     let back  = card.querySelector('.back');
     if (front.classList.contains('flipper-front-off')){
         // Passer le front devant
-        addFlippCards(front, back, 'on');
-        removeFlippCards(front, back, 'off');
+        replaceFlippCards(front, back, 'on', 'off');
     } else if (front.classList.contains('flipper-front-on')){
         // Si est en position front (pour passer le back devant)
-        addFlippCards(front, back, 'off');
-        removeFlippCards(front, back, 'on');
+        replaceFlippCards(front, back, 'off', 'on');
+        //Enlever l'animation et les bordures :
         card.classList.remove('unvalid');
+        back.classList.remove('border', 'border-danger', 'border-2');
     } else {
         // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes : 
         addFlippCards(front, back, 'on');
     }
 }
-
+function replaceFlippCards(front, back, add, remove){
+    front.classList.replace(('flipper-front-'+remove), ('flipper-front-'+add));
+    back.classList.replace(('flipper-back-'+remove), ('flipper-back-'+add));
+}
 function addFlippCards(front, back, add){
     front.classList.add(('flipper-front-'+add));
     back.classList.add('flipper-back-'+add);
-}
-function removeFlippCards(front, back, remove) {
-    front.classList.remove('flipper-front-'+remove);
-    back.classList.remove('flipper-back-'+remove);
 }
 
 function SelectTheme() {
