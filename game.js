@@ -9,6 +9,8 @@ const ferme         = ['Vache', 'Vache', 'Poule', 'Poule', 'Chien', 'Chien', 'Mo
 const themes        = [ocean, savane, ferme];
 
 let firstCardClick  = true;
+let returnedCards   = 0;
+let timerInterval;
 
 let listCards       = [];
 let counter         = 60;
@@ -56,12 +58,30 @@ cards.forEach(card => {
                 VerifierCartes();
             }
         }
+        //Verifier si toutes les cartes sont retournées et valider :
+        gameStatus();
     })
 })
 function timerOn(){
     timerProgress.classList.add('timer-on');
-    var timerInterval = setInterval(lessCounter, 1000);
+    timerInterval = setInterval(lessCounter, 1000);
 }
+
+function gameStatus(){
+    cards.forEach(card => {
+        if (card.children[0].classList.contains('flipper-front-on')){
+            returnedCards++;
+            console.log(returnedCards);
+        }
+    })
+    if (returnedCards == cards.length){
+        clearInterval(timerInterval);
+        console.log(timerProgress.style.width)
+    } else {
+        returnedCards = 0;
+    }
+}
+
 function lessCounter() {
     counter--;
     timer.innerText = counter+'s';
@@ -133,7 +153,9 @@ function addFlippCards(front, back, add){
     back.classList.add('flipper-back-'+add);
 }
 
-
+function win(){
+    
+}
 
 
 //_____4_____
