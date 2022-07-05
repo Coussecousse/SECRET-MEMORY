@@ -52,7 +52,7 @@ cards.forEach(card => {
         // Lance le timer : 
         GetCards(card);
         if (listCards.length <= 2 && !card.classList.contains('valid') && !card.children[0].classList.contains('flipper-front-on')){
-            TurnCards(card);
+            turnCards(card);
             if (listCards.length == 2){
                 VerifierCartes();
             }
@@ -87,6 +87,9 @@ function lessCounter() {
     if (counter == 0){
         winOrLose('Perdu !');
         clearInterval(timerInterval);
+        cards.forEach(card => {
+            turnCards(card);
+        })
     } else {    
         counter--;
         timer.innerText = counter+'s';
@@ -123,7 +126,7 @@ function VerifierCartes(){
             }, 500);
 
             // Retourner les cartes : 
-            setTimeout(TurnCards, 1000,card);
+            setTimeout(turnCards, 1000,card);
         })
     }
     //Empêche de pouvoir tourner d'autres cartes:
@@ -133,13 +136,13 @@ function VerifierCartes(){
     }, 900);
 }
 
-function TurnCards(card){
+function turnCards(card){
     let front = card.querySelector('.front');
     let back  = card.querySelector('.back');
     if (front.classList.contains('flipper-front-off')){
         // Passer le front devant
         replaceFlippCards(front, back, 'on', 'off');
-    } else if (front.classList.contains('flipper-front-on')){
+    } else if (front.classList.contains('flipper-front-on') && !card.classList.contains('valid')){
         // Si est en position front (pour passer le back devant)
         replaceFlippCards(front, back, 'off', 'on');
         //Enlever l'animation et les bordures :
@@ -187,3 +190,14 @@ function winOrLose(text){
 
 //____6_____
 //Fonction rejouer
+
+const playAgain = document.querySelector('#play-again');
+
+playAgain.addEventListener('click', () => {
+    playAgainFunction();
+})
+
+function playAgainFunction() {
+    CardsDistribution();
+}
+
