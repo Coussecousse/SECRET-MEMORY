@@ -146,7 +146,7 @@ footer {
 }
 
 .timer-on {
-    animation: timer 60s !important;
+    animation: timer 60s linear!important;
 }
 
 @keyframes timer {
@@ -158,7 +158,7 @@ footer {
     }
 }
 .winOrLose {
-    animation: winOrLose .3s ease-in;
+    animation: winOrLose .2s ease-in;
 }
 @keyframes winOrLose {
     from {

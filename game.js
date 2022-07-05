@@ -52,7 +52,6 @@ cards.forEach(card => {
         // Lance le timer : 
         GetCards(card);
         if (listCards.length <= 2 && !card.classList.contains('valid') && !card.children[0].classList.contains('flipper-front-on')){
-            console.log('je passe ici');
             TurnCards(card);
             if (listCards.length == 2){
                 VerifierCartes();
@@ -71,12 +70,13 @@ function gameStatus(){
     cards.forEach(card => {
         if (card.children[0].classList.contains('flipper-front-on')){
             returnedCards++;
-            console.log(returnedCards);
         }
     })
     if (returnedCards == cards.length){
         clearInterval(timerInterval);
-        console.log(timerProgress.style.width)
+        let currentWidthOfProgressBar = timerProgress.clientWidth;
+        timerProgress.style.width = currentWidthOfProgressBar+'px';
+        timerProgress.classList.remove('timer-on');
         setTimeout(winOrLose,800,'Bravo !');
     } else {
         returnedCards = 0;
@@ -85,8 +85,8 @@ function gameStatus(){
 
 function lessCounter() {
     if (counter == 0){
-        clearInterval(timerInterval);
         winOrLose('Perdu !');
+        clearInterval(timerInterval);
     } else {    
         counter--;
         timer.innerText = counter+'s';
