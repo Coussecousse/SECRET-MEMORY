@@ -77,14 +77,20 @@ function gameStatus(){
     if (returnedCards == cards.length){
         clearInterval(timerInterval);
         console.log(timerProgress.style.width)
+        setTimeout(winOrLose,800,'Bravo !');
     } else {
         returnedCards = 0;
     }
 }
 
 function lessCounter() {
-    counter--;
-    timer.innerText = counter+'s';
+    if (counter == 0){
+        clearInterval(timerInterval);
+        winOrLose('Perdu !');
+    } else {    
+        counter--;
+        timer.innerText = counter+'s';
+    }
 }
 function GetCards(card){
     if (listCards.length <= 2 && !card.classList.contains('valid')) {
@@ -153,8 +159,20 @@ function addFlippCards(front, back, add){
     back.classList.add('flipper-back-'+add);
 }
 
-function win(){
-    
+function winOrLose(text){
+    const div = document.createElement('div');
+    const main = document.querySelector('main');
+
+    div.classList.add('winOrLose','rounded', 'bg-white', 'fs-1', 'd-flex', 'justify-content-center', 'align-items-center', 'position-absolute', 'top-50', 'start-50', 'translate-middle');
+    div.style.width = '300px';
+    div.style.height = '200px';
+    div.textContent = text;
+    if (text == 'Perdu !'){
+        div.classList.add('text-danger');
+    } else {
+        div.classList.add('text-success');
+    }
+    main.append(div);
 }
 
 

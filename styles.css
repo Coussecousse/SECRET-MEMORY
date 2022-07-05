@@ -157,3 +157,15 @@ footer {
         width: 0%;
     }
 }
+.winOrLose {
+    animation: winOrLose .3s ease-in;
+}
+@keyframes winOrLose {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    } to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
