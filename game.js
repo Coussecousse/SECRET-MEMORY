@@ -1,4 +1,5 @@
 let cards         = document.querySelectorAll('.cards');
+console.log("Je suis en tout haut")
 //_____1_____
 //Une liste avec le nom des animaux -> 6 paires d'animaux. Exemple liste ['girafe', 'girafe', 'zèbre', 'zèbre'] -> A chaque fois deux fois les animaux
 //Prendre les cartes une par une et tirer au sort dans la liste le nom de l'animal inscrit sur la carte puis enlève l'animal de la liste 
@@ -11,6 +12,7 @@ const themes        = [ocean, savane, ferme];
 let firstCardClick  = true;
 let returnedCards   = 0;
 let timerInterval;
+console.log("Je suis au milieu");
 
 let listCards       = [];
 let counter         = 60;
@@ -20,6 +22,7 @@ const timerProgress = document.querySelector('.progress-bar');
 CardsDistribution();
 
 function CardsDistribution() {
+    console.log("Je distribue les cartes")
     let theme = SelectTheme();
     theme     = themes[theme];
     let cloneTheme   = [...theme];
@@ -88,7 +91,9 @@ function lessCounter() {
         winOrLose('Perdu !');
         clearInterval(timerInterval);
         cards.forEach(card => {
-            turnCards(card);
+            if (!card.children[0].classList.contains('flipper-front-on')){
+                turnCards(card);
+            }
         })
     } else {    
         counter--;
@@ -198,6 +203,26 @@ playAgain.addEventListener('click', () => {
 })
 
 function playAgainFunction() {
-    CardsDistribution();
+    setTimeout(CardsDistribution, 1000);
+    cards.forEach(card => {
+        let front = card.children[0];
+        let back = card.children[1];
+        if (!card.children[0].classList.contains('flipper-front-off')){
+            replaceFlippCards(front, back, 'off', 'on');
+            card.classList.remove('valid');
+        }
+    })
+    resetVar();
+    
+}
+function resetVar(){
+    clearInterval(timerInterval);
+    "je suis ici ?"
+    firstCardClick = true;
+    counter        = 60;
+    timer.textContent = counter+'s';
+    timerProgress.style.width = "100%";
+    timerProgress.classList.remove('timer-on');
+
 }
 
