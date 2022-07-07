@@ -275,10 +275,7 @@ function winOrLose(text) {
   main.append(div);
 }
 
-//____5_____
-//Si le jeu est gagné, le timer est arrêté, "BRAVO" s'affiche, et on peut juste appuyer sur rejouer
-
-//____6_____
+//____ETAPE 6_____
 //Fonction rejouer
 
 const playAgain = document.querySelector("#play-again");
