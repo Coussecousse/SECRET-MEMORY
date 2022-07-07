@@ -1,29 +1,48 @@
 let cards         = document.querySelectorAll('.cards');
-console.log("Je suis en tout haut")
-//_____1_____
-//Une liste avec le nom des animaux -> 6 paires d'animaux. Exemple liste ['girafe', 'girafe', 'zèbre', 'zèbre'] -> A chaque fois deux fois les animaux
-//Prendre les cartes une par une et tirer au sort dans la liste le nom de l'animal inscrit sur la carte puis enlève l'animal de la liste 
-//Ajouter le nom de l'animal tiré au sort et le mettre sur la carte selectionnée (en data-animal ?)
+//_____ETAPE 1_____
+// Une liste avec le nom des animaux -> 6 paires d'animaux. Exemple liste ['girafe', 'girafe', 'zèbre', 'zèbre'] -> A chaque fois deux fois les animaux
+// Prendre les cartes une par une et tirer au sort dans la liste le nom de l'animal inscrit sur la carte puis enlève l'animal de la liste 
+// Ajouter le nom de l'animal tiré au sort et le mettre sur la carte selectionnée (en data-animal ?)
+
+// THEME
 const ocean         = ['Hyppocampe', 'Hyppocampe', 'Poisson Clown','Poisson Clown', 'Pieuvre', 'Pieuvre', 'Requin', 'Requin', 'Baleine', 'Baleine','Tortue', 'Tortue'];
 const savane        = ['Lion', 'Lion', 'Girafe', 'Girafe', 'Zèbre', 'Zèbre', 'Éléphant', 'Éléphant', 'Chimpanzé', 'Chimpanzé', 'Hippopotame', 'Hippopotame'];
 const ferme         = ['Vache', 'Vache', 'Poule', 'Poule', 'Chien', 'Chien', 'Mouton', 'Mouton', 'Cochon', 'Cochon', 'Cheval', 'Cheval']
 const themes        = [ocean, savane, ferme];
+let theme;
 
+// TURN CARDS
+let listCards       = [];
 let firstCardClick  = true;
 let returnedCards   = 0;
-let timerInterval;
-console.log("Je suis au milieu");
 
-let listCards       = [];
+
+// TIMER
+let timerInterval;
 let counter         = 60;
 const timer         = document.querySelector('.timer__counter');
 const timerProgress = document.querySelector('.progress-bar');
-//____________2__________Distribution des cartes au tout début :
+
+// WIN OR LOSE
+const div           = document.createElement('div');
+const main          = document.querySelector('main');
+
+//____________ETAPE 2__________
+// Distribution des cartes au tout début :
 CardsDistribution();
 
 function CardsDistribution() {
-    console.log("Je distribue les cartes")
-    let theme = SelectTheme();
+    if (theme == null){
+        theme = SelectTheme();
+        console.log("je suis ici")
+    } else {
+        console.log("je suis là")
+        let newTheme;
+        do {
+            newTheme = SelectTheme()
+        } while (newTheme == theme)
+        theme = newTheme;
+    }
     theme     = themes[theme];
     let cloneTheme   = [...theme];
     cards.forEach(card => {
@@ -37,57 +56,46 @@ function CardsDistribution() {
 function SelectTheme() {
     return Math.floor(Math.random() * (themes.length));
 }
+//_____ETAPE 3_______
+//Lancer le timer dès que la première carte est retournée 
+//Si le compteur arrive à 0, c'est perdu, toutes les cartes se retournent et on peut juste appuyer sur rejouer
 
-//____________3__________Cartes qui se retournent :
+//____________ETAPE 3__________
+// Cartes qui se retournent :
 //_____3_____
-//Rentre la carte sélectionnée dans une liste pour qu'il n'y en ai que 2 maximums. 
-//S'il y a moins de 2 cartes dans la liste, alors les cartes sont retournées
-//Inspecte si les deux cartes sont les mêmes, si non, les retournent
-//La carte devient rouge, fait une animation de droite à gauche et se retourne en front
-//Si la carte est la même, la carte devient verte et reste en back et on ne peut plus appuyer dessus
+// Rentre la carte sélectionnée dans une liste pour qu'il n'y en ai que 2 maximum. 
+// S'il y a moins de 2 cartes dans la liste, alors les cartes sont retournées
+// Inspecte si les deux cartes sont les mêmes, si non, les retournent
+// La carte devient rouge, fait une animation de droite à gauche et se retourne en front
+// Si la carte est la même, la carte devient verte et reste en back et on ne peut plus appuyer dessus
 cards.forEach(card => {
     card.addEventListener('click', (e) => {
-        // Prend les cartes
+        // Vérifie si c'est la première carte retournée pour lancer le timer
         if (firstCardClick){
             timerOn();
             firstCardClick = false;
         }
-        // Lance le timer : 
+        // Récupère les cartes dans une liste
         GetCards(card);
         if (listCards.length <= 2 && !card.classList.contains('valid') && !card.children[0].classList.contains('flipper-front-on')){
             turnCards(card);
             if (listCards.length == 2){
-                VerifierCartes();
+                verifyCards();
             }
         }
-        //Verifier si toutes les cartes sont retournées et valider :
+        //Verifier si toutes les cartes sont retournées :
         gameStatus();
     })
 })
+// Lance le timer:
 function timerOn(){
     timerProgress.classList.add('timer-on');
     timerInterval = setInterval(lessCounter, 1000);
 }
-
-function gameStatus(){
-    cards.forEach(card => {
-        if (card.children[0].classList.contains('flipper-front-on')){
-            returnedCards++;
-        }
-    })
-    if (returnedCards == cards.length){
-        clearInterval(timerInterval);
-        let currentWidthOfProgressBar = timerProgress.clientWidth;
-        timerProgress.style.width = currentWidthOfProgressBar+'px';
-        timerProgress.classList.remove('timer-on');
-        setTimeout(winOrLose,800,'Bravo !');
-    } else {
-        returnedCards = 0;
-    }
-}
-
+// Enlève 1 au compteur et l'affiche
 function lessCounter() {
     if (counter == 0){
+        // Si le timer est à 0, le jeu est perdu:
         winOrLose('Perdu !');
         clearInterval(timerInterval);
         cards.forEach(card => {
@@ -100,6 +108,8 @@ function lessCounter() {
         timer.innerText = counter+'s';
     }
 }
+
+// Récupère les cartes:
 function GetCards(card){
     if (listCards.length <= 2 && !card.classList.contains('valid')) {
         listCards.push(card);
@@ -111,7 +121,37 @@ function GetCards(card){
         }
     }
 }
-function VerifierCartes(){
+
+// Tourne les cartes :
+function turnCards(card){
+    let front = card.querySelector('.front');
+    let back  = card.querySelector('.back');
+    if (front.classList.contains('flipper-front-off')){
+        // Passer le front devant:
+        replaceFlippCards(front, back, 'on', 'off');
+    } else if (front.classList.contains('flipper-front-on') && !card.classList.contains('valid')){
+        // Si carte en position front (pour passer le back devant)
+        replaceFlippCards(front, back, 'off', 'on');
+        //Enlever l'animation et les bordures :
+        card.classList.remove('unvalid');
+        back.classList.remove('border', 'border-danger', 'border-2');
+    } else {
+        // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes : 
+        addFlippCards(front, back, 'on');
+    }
+}
+
+function replaceFlippCards(front, back, add, remove){
+    front.classList.replace(('flipper-front-'+remove), ('flipper-front-'+add));
+    back.classList.replace(('flipper-back-'+remove), ('flipper-back-'+add));
+}
+function addFlippCards(front, back, add){
+    front.classList.add(('flipper-front-'+add));
+    back.classList.add('flipper-back-'+add);
+}
+
+// Vérifie si les cartes sont les mêmes:
+function verifyCards(){
     let firstCard  = listCards[0];
     let secondCard = listCards[1];
     if (firstCard.dataset.animal === secondCard.dataset.animal) {
@@ -134,60 +174,46 @@ function VerifierCartes(){
             setTimeout(turnCards, 1000,card);
         })
     }
-    //Empêche de pouvoir tourner d'autres cartes:
+    //Remet la liste des cartes à zero, permettant de tourner à nouveau d'autres cartes:
     setTimeout(() => {
         firstCard.dataset.number = ""
         listCards = [];
     }, 900);
 }
 
-function turnCards(card){
-    let front = card.querySelector('.front');
-    let back  = card.querySelector('.back');
-    if (front.classList.contains('flipper-front-off')){
-        // Passer le front devant
-        replaceFlippCards(front, back, 'on', 'off');
-    } else if (front.classList.contains('flipper-front-on') && !card.classList.contains('valid')){
-        // Si est en position front (pour passer le back devant)
-        replaceFlippCards(front, back, 'off', 'on');
-        //Enlever l'animation et les bordures :
-        card.classList.remove('unvalid');
-        back.classList.remove('border', 'border-danger', 'border-2');
+
+// Vérifie le jeu:
+function gameStatus(){
+    cards.forEach(card => {
+        // Compte le nombre de cartes retournées (donc valides):
+        if (card.children[0].classList.contains('flipper-front-on')){
+            returnedCards++;
+        }
+    })
+    if (returnedCards == cards.length){
+        // Si il y a autant de cartes retournées alors le jeu est gagné:
+        clearInterval(timerInterval);
+        let currentWidthProgressBar = timerProgress.clientWidth;
+        timerProgress.style.width = currentWidthProgressBar+'px';
+        timerProgress.classList.remove('timer-on');
+        setTimeout(winOrLose,800,'Bravo !');
     } else {
-        // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes : 
-        addFlippCards(front, back, 'on');
+        returnedCards = 0;
     }
 }
-function replaceFlippCards(front, back, add, remove){
-    front.classList.replace(('flipper-front-'+remove), ('flipper-front-'+add));
-    back.classList.replace(('flipper-back-'+remove), ('flipper-back-'+add));
-}
-function addFlippCards(front, back, add){
-    front.classList.add(('flipper-front-'+add));
-    back.classList.add('flipper-back-'+add);
-}
 
+
+// Ajoute la popup de win ou lose, arrête le timer :
 function winOrLose(text){
-    const div = document.createElement('div');
-    const main = document.querySelector('main');
-
-    div.classList.add('winOrLose','rounded', 'bg-white', 'fs-1', 'd-flex', 'justify-content-center', 'align-items-center', 'position-absolute', 'top-50', 'start-50', 'translate-middle');
+    div.classList.add('winOrLose','rounded', 'bg-white', 'fs-1', 'd-flex', 'justify-content-center', 'align-items-center', 'position-absolute', 'top-50', 'start-50', 'translate-middle','text-success');
     div.style.width = '300px';
     div.style.height = '200px';
     div.textContent = text;
     if (text == 'Perdu !'){
-        div.classList.add('text-danger');
-    } else {
-        div.classList.add('text-success');
+        div.classList.replace('text-success','text-danger');
     }
     main.append(div);
 }
-
-
-//_____4_____
-//Lancer le timer dès que la première carte est retournée 
-//Si le compteur arrive à 0, c'est perdu, toutes les cartes se retournent et on peut juste appuyer sur rejouer
-
 
 
 //____5_____
@@ -210,19 +236,20 @@ function playAgainFunction() {
         if (!card.children[0].classList.contains('flipper-front-off')){
             replaceFlippCards(front, back, 'off', 'on');
             card.classList.remove('valid');
+            back.classList.remove("border", "border-success", "border-2");
         }
     })
     resetVar();
-    
+
 }
 function resetVar(){
     clearInterval(timerInterval);
-    "je suis ici ?"
+    listCards = [];
     firstCardClick = true;
     counter        = 60;
     timer.textContent = counter+'s';
     timerProgress.style.width = "100%";
     timerProgress.classList.remove('timer-on');
-
+    div.remove();
 }
 
