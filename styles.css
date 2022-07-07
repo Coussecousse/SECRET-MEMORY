@@ -21,9 +21,11 @@
   position: relative;
   bottom: 100%;
   z-index: -1;
+  -webkit-transform:translate3d(0,0,0)
 }
 .front {
   z-index: 1;
+  -webkit-transform:translate3d(0,0,100px);
   position: relative;
   background-color: white;
   backface-visibility: hidden;
@@ -32,23 +34,27 @@
 /* Pour retourner :  */
 .flipper-front-on {
   z-index: -1;
+  -webkit-transform:translate3d(0,0,0);
   animation: rotatefront-on 0.6s ease-in-out;
-  transition: z-index 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
 }
 .flipper-back-on {
   z-index: 1;
+  -webkit-transform:translate3d(0,0,100px);
   animation: rotateback-on 0.6s ease-in-out;
-  transition: z-index 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
 }
 .flipper-front-off {
   z-index: 1;
+  -webkit-transform:translate3d(0,0,100px);
   animation: rotatefront-off 0.6s ease-in-out;
   transition: z-index 0.7s ease-in-out;
 }
 .flipper-back-off {
   z-index: -1;
+  -webkit-transform:translate3d(0,0,0);
   animation: rotateback-off 0.6s ease-in-out;
-  transition: z-index 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 @keyframes rotatefront-on {
