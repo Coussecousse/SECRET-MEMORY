@@ -229,7 +229,7 @@ playAgain.addEventListener('click', () => {
 })
 
 function playAgainFunction() {
-    setTimeout(CardsDistribution, 1000);
+    setTimeout(CardsDistribution, 800);
     cards.forEach(card => {
         let front = card.children[0];
         let back = card.children[1];
@@ -244,7 +244,7 @@ function playAgainFunction() {
 }
 function resetVar(){
     clearInterval(timerInterval);
-    listCards = [];
+    listCards      = [];
     firstCardClick = true;
     counter        = 60;
     timer.textContent = counter+'s';

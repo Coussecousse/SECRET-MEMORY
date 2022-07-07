@@ -4,36 +4,10 @@
     box-sizing: border-box;
     font-family:'Fredoka One', cursive;
 }
-header{
-    background: #4B4D4E;
-}
-h1 {
-    letter-spacing: .5rem;
-    text-shadow: 0px 6px 6px rgba(0,0,0,0.32);;
-}
-
-#play-again {
-    background: #5B6BA5;
-}
-body {
-    background: url("img/illustration-low-poly-symmetry-green-blue-triangle-73889-wallhere.com.jpg") no-repeat;
-    background-size: cover;
-    height: fit-content;
-}
-.progress{
-    box-shadow:0px 6px 6px rgba(0,0,0,0.32);
-}
-.timer__counter {
-    letter-spacing: .4rem;
-    color: #4B4D4E;
-    text-shadow: 0px 6px 6px rgba(0,0,0,0.32);
-}
 .cards {
     height: 200px;
-    margin: 0;
     cursor: pointer;
     transform-style: preserve-3d;
-
 }
 
 .back {
@@ -52,11 +26,6 @@ body {
     backface-visibility: hidden;
 }
 
-footer {
-    background: #4B4D4E;
-    height: 52px;
-    color: #959697;
-}
 /* Pour retourner :  */
 .flipper-front-on {
     z-index: -1; 
