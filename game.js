@@ -58,7 +58,7 @@ let returnedCards = 0;
 // TIMER
 let timerInterval;
 let counter = 60;
-const timer = document.querySelector(".timer__counter");
+const timer = document.querySelector(".timer__number");
 const timerProgress = document.querySelector(".progress-bar");
 
 // WIN OR LOSE
@@ -68,13 +68,12 @@ const main = document.querySelector("main");
 //____________ETAPE 2__________
 // Distribution des cartes au tout début :
 CardsDistribution();
+timer.textContent = counter + "s";
 
 function CardsDistribution() {
   if (theme == null) {
     theme = SelectTheme();
-    console.log("je suis ici");
   } else {
-    console.log("je suis là");
     let newTheme;
     do {
       newTheme = SelectTheme();
@@ -301,9 +300,35 @@ function resetVar() {
   clearInterval(timerInterval);
   listCards = [];
   firstCardClick = true;
-  counter = 60;
+  if (difficulty.classList.contains("easy")) {
+    counter = 60;
+  } else {
+    counter = 30;
+  }
   timer.textContent = counter + "s";
   timerProgress.style.width = "100%";
   timerProgress.classList.remove("timer-on");
   div.remove();
 }
+
+// ETAPE BONUS :
+// Ajouter un niveau de difficulté
+
+const difficulty = document.querySelector("#difficulty");
+
+difficulty.addEventListener("click", () => {
+  // On ne peut pas changer le temps si le jeu est lancé
+  if (counter == 60 || counter == 30) {
+    if (difficulty.classList.contains("easy")) {
+      counter = 30;
+      timer.textContent = counter + "s";
+      difficulty.classList.replace("easy", "difficult");
+      document.documentElement.style.setProperty("--timer", "30s");
+    } else {
+      counter = 60;
+      timer.textContent = counter + "s";
+      difficulty.classList.replace("difficul", "easy");
+      document.documentElement.style.setProperty("--timer", "60s");
+    }
+  }
+});

@@ -1,3 +1,6 @@
+:root {
+  --timer: 60s;
+}
 * {
   margin: 0;
   padding: 0;
@@ -119,7 +122,7 @@
 }
 
 .timer-on {
-  animation: timer 60s linear !important;
+  animation: timer var(--timer) linear !important;
 }
 
 @keyframes timer {
