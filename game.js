@@ -127,7 +127,7 @@ cards.forEach((card) => {
     }
     //_______ETAPE 4 ________
     //Verifier si toutes les cartes sont retournées :
-    if (counter < 0){
+    if (counter > 0){
       gameStatus();
     }
   });
