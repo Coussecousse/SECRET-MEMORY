@@ -17,7 +17,7 @@
   color: white;
   background: #4b4d4e;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
   position: relative;
   bottom: 100%;
   z-index: -1;

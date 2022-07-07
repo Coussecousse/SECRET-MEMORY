@@ -71,16 +71,17 @@ CardsDistribution();
 timer.textContent = counter + "s";
 
 function CardsDistribution() {
-  if (theme == null) {
+  if (theme == undefined) {
     theme = SelectTheme();
+    theme = themes[theme];
   } else {
     let newTheme;
     do {
       newTheme = SelectTheme();
+      newTheme = themes[newTheme]
     } while (newTheme == theme);
     theme = newTheme;
   }
-  theme = themes[theme];
   let cloneTheme = [...theme];
   cards.forEach((card) => {
     let index = Math.floor(Math.random() * cloneTheme.length);
@@ -124,6 +125,7 @@ cards.forEach((card) => {
         verifyCards();
       }
     }
+    //_______ETAPE 4 ________
     //Verifier si toutes les cartes sont retournées :
     gameStatus();
   });
@@ -274,7 +276,7 @@ function winOrLose(text) {
   main.append(div);
 }
 
-//____ETAPE 6_____
+//____ETAPE 5_____
 //Fonction rejouer
 
 const playAgain = document.querySelector("#play-again");
