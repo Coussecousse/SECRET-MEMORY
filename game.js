@@ -143,11 +143,12 @@ function lessCounter() {
     // Si le timer est à 0, le jeu est perdu:
     winOrLose("Perdu !");
     clearInterval(timerInterval);
-    cards.forEach((card) => {
+    cards.forEach((card) => 
+    setTimeout(()=> {
       if (!card.children[0].classList.contains("flipper-front-on")) {
         turnCards(card);
-      }
-    });
+        }
+      },200))
   } else {
     counter--;
     timer.innerText = counter + "s";
