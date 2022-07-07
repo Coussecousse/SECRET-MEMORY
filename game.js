@@ -119,6 +119,7 @@ cards.forEach((card) => {
       listCards.length <= 2 &&
       !card.classList.contains("valid") &&
       !card.children[0].classList.contains("flipper-front-on")
+      && counter > 0
     ) {
       turnCards(card);
       if (listCards.length == 2) {
