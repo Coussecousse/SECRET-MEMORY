@@ -30,7 +30,6 @@
 }
 .front {
   background-color: white;
-  backface-visibility: hidden;
 }
 .rotate-on {
   transform: rotateY(180deg);
@@ -44,13 +43,13 @@
 }
 @keyframes valid {
   0% {
-    transform: translateY(0);
+    top: 0;
   }
   50% {
-    transform: translateY(-10px);
+    top: -10px;
   }
   100% {
-    transform: translateY(0);
+    top: 0;
   }
 }
 .unvalid {
@@ -58,19 +57,19 @@
 }
 @keyframes unvalid {
   0% {
-    transform: translateX(0);
+    left: 0;
   }
   25% {
-    transform: translate(-10px);
+    left: -10px;
   }
   50% {
-    transform: translate(0px);
+    left: 0;
   }
   75% {
-    transform: translate(10px);
+    left: 10px;
   }
   100% {
-    transform: translate(0);
+    left: 0;
   }
 }
 .progress-bar {
