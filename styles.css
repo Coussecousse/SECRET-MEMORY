@@ -8,88 +8,37 @@
   font-family: "Fredoka One", cursive;
 }
 .cards {
+  position: relative;
   height: 200px;
   cursor: pointer;
   transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
+  transition: transform .6s;
 }
-
+.front, .back {
+  position: absolute;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+}
 .back {
   color: white;
   background: #4b4d4e;
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(1.1rem, 3vw, 1.5rem);
-  position: relative;
   bottom: 100%;
-  z-index: -1;
-  /* -webkit-transform:translateZ(-100px); */
+  transform: rotateY(180deg);
 }
 .front {
-  z-index: 1;
-  /* -webkit-transform:translateZ(100px); */
-  position: relative;
   background-color: white;
   backface-visibility: hidden;
 }
-
-/* Pour retourner :  */
-.flipper-front-on {
-  z-index: -1;
-  -webkit-transform:translateZ(-100px);
-  animation: rotatefront-on 0.6s ease-in-out;
-  transition: z-index 0.7s ease-in-out;
+.rotate-on {
+  transform: rotateY(180deg);
 }
-.flipper-back-on {
-  z-index: 1;
-  -webkit-transform:translateZ(100px);
-  animation: rotateback-on 0.6s ease-in-out;
-  transition: z-index 0.7s ease-in-out;
-}
-.flipper-front-off {
-  z-index: 1;
-  -webkit-transform:translateZ(100px);
-  animation: rotatefront-off 0.6s ease-in-out;
-  transition: z-index 0.7s ease-in-out;
-}
-.flipper-back-off {
-  z-index: -1;
-  -webkit-transform:translateZ(-100px);
-  animation: rotateback-off 0.6s ease-in-out;
-  transition: z-index 0.4s ease-in-out;
+.rotate-off {
+  transform: rotateY(0);
 }
 
-@keyframes rotatefront-on {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(-180deg);
-  }
-}
-@keyframes rotateback-on {
-  from {
-    transform: rotateY(180deg);
-  }
-  to {
-    transform: rotateY(0deg);
-  }
-}
-@keyframes rotatefront-off {
-  from {
-    transform: rotateY(-180deg);
-  }
-  to {
-    transform: rotateY(0deg);
-  }
-}
-@keyframes rotateback-off {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(180deg);
-  }
-}
 .valid {
   animation: valid 0.3s ease-in-out;
 }

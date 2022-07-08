@@ -118,7 +118,7 @@ cards.forEach((card) => {
     if (
       listCards.length <= 2 &&
       !card.classList.contains("valid") &&
-      !card.children[0].classList.contains("flipper-front-on")
+      !card.classList.contains("rotate-on")
       && counter > 0
     ) {
       turnCards(card);
@@ -171,33 +171,22 @@ function GetCards(card) {
 
 // Tourne les cartes :
 function turnCards(card) {
-  let front = card.querySelector(".front");
-  let back = card.querySelector(".back");
-  if (front.classList.contains("flipper-front-off")) {
+  if (card.classList.contains("rotate-off")) {
     // Passer le front devant:
-    replaceFlippCards(front, back, "on", "off");
+    card.classList.replace('rotate-off', 'rotate-on');
   } else if (
-    front.classList.contains("flipper-front-on") &&
+    card.classList.contains("rotate-on") &&
     !card.classList.contains("valid")
   ) {
     // Si carte en position front (pour passer le back devant)
-    replaceFlippCards(front, back, "off", "on");
+    card.classList.replace('rotate-on', 'rotate-off');
     //Enlever l'animation et les bordures :
     card.classList.remove("unvalid");
     back.classList.remove("border", "border-danger", "border-2");
   } else {
     // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes :
-    addFlippCards(front, back, "on");
+    card.classList.add('rotate-on');
   }
-}
-
-function replaceFlippCards(front, back, add, remove) {
-  front.classList.replace("flipper-front-" + remove, "flipper-front-" + add);
-  back.classList.replace("flipper-back-" + remove, "flipper-back-" + add);
-}
-function addFlippCards(front, back, add) {
-  front.classList.add("flipper-front-" + add);
-  back.classList.add("flipper-back-" + add);
 }
 
 // Vérifie si les cartes sont les mêmes:
@@ -239,7 +228,7 @@ function verifyCards() {
 function gameStatus() {
   cards.forEach((card) => {
     // Compte le nombre de cartes retournées (donc valides):
-    if (card.children[0].classList.contains("flipper-front-on")) {
+    if (card.classList.contains("rotate-on")) {
       returnedCards++;
     }
   });
@@ -294,8 +283,8 @@ function playAgainFunction() {
   cards.forEach((card) => {
     let front = card.children[0];
     let back = card.children[1];
-    if (!card.children[0].classList.contains("flipper-front-off")) {
-      replaceFlippCards(front, back, "off", "on");
+    if (!card.classList.contains("rotate-off")) {
+      card.classList.replace('rotate-on', 'rotate-off')
       card.classList.remove("valid");
       back.classList.remove("border", "border-success", "border-2");
     }
