@@ -146,7 +146,7 @@ function lessCounter() {
     clearInterval(timerInterval);
     cards.forEach((card) => 
     setTimeout(()=> {
-      if (!card.children[0].classList.contains("flipper-front-on")) {
+      if (!card.classList.contains("rotate-on")) {
         turnCards(card);
         }
       },200))
@@ -182,7 +182,7 @@ function turnCards(card) {
     card.classList.replace('rotate-on', 'rotate-off');
     //Enlever l'animation et les bordures :
     card.classList.remove("unvalid");
-    back.classList.remove("border", "border-danger", "border-2");
+    card.classList.remove("border", "border-danger", "border-2");
   } else {
     // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes :
     card.classList.add('rotate-on');
@@ -201,7 +201,7 @@ function verifyCards() {
       }, 500);
       // Bordure ajoutée :
       setTimeout(() => {
-        card.children[1].classList.add("border", "border-success", "border-2");
+        card.classList.add("border", "border-success", "border-2");
       }, 800);
     });
   } else {
@@ -210,7 +210,7 @@ function verifyCards() {
       // Animation mauvaise carte :
       setTimeout(() => {
         card.classList.add("unvalid");
-        card.children[1].classList.add("border", "border-danger", "border-2");
+        card.classList.add("border", "border-danger", "border-2");
       }, 500);
 
       // Retourner les cartes :
