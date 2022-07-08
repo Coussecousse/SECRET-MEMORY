@@ -6,8 +6,8 @@ let cards = document.querySelectorAll(".cards");
 
 // THEME
 const ocean = [
-  "Hyppocampe",
-  "Hyppocampe",
+  "Hippocampe",
+  "Hippocampe",
   "Poisson Clown",
   "Poisson Clown",
   "Pieuvre",
