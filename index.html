@@ -8,263 +8,206 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Mali:wght@500&display=swap"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="img/My-Little-Pony-Logo-2020.webp" type="image/x-icon">
     <script
       src="https://kit.fontawesome.com/4ba6d56c15.js"
       crossorigin="anonymous"
     ></script>
-    <title>Projet Secret</title>
+    <title>MEMORY</title>
   </head>
-  <body>
-    <main>
-      <header>
-        <div class="container">
-          <div class="nav__logo">
-            <a href="#accueil"
-              ><img
-                src="img/My-Little-Pony-Logo-2020.webp"
-                alt="Logo My Little Pony"
-            /></a>
+  <body
+    class="d-flex flex-column min-vh-100 min-wv-100"
+    style="
+      background: url('img/illustration-low-poly-symmetry-green-blue-triangle-73889-wallhere.com.jpg')
+        no-repeat;
+      background-size: cover;
+    "
+  >
+    <header
+      class="container-fluid d-flex justify-content-evenly"
+      style="background: #4b4d4e"
+    >
+      <div class="container-md text-white">
+        <div class="row d-flex justify-content-evenly">
+          <h1
+            class="col-md-6 col-lg-4 fw-bold d-flex justify-content-center"
+            style="
+              font-size: clamp(3rem, 6vw, 4rem);
+              letter-spacing: 0.2em;
+              text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.32);
+            "
+          >
+            MEMORY
+          </h1>
+          <a
+            href="#"
+            class="col-6 col-md-3 col-lg-2 align-items-center fs-5 shadow rounded text-white d-flex justify-content-center p-2 m-1 align-self-center text-decoration-none"
+            id="play-again"
+            style="height: 50px; background: #5b6ba5"
+            >Rejouer<i class="fa-solid fa-rotate ms-2"></i
+          ></a>
+        </div>
+      </div>
+    </header>
+    <main class="py-5 flex-fill d-flex flex-column w-100 h-100">
+      <div class="mb-4 timer container my-auto">
+        <div class="d-flex justify-content-center w-100 row g-2">
+          <div
+            class="progress col-12 col-md-6 align-self-center p-0 mt-3"
+            style="
+              height: 20px;
+              background: #4b4d4e;
+              box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.32);
+            "
+          >
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
           </div>
-          <div class="nav__menu">
-            <button class="nav__btn btn-active">
-              <i class="fa-solid fa-3x fa-heart-circle-plus"></i>
-            </button>
-            <button class="nav__btn btn-desactive">
-              <i class="fa-solid fa-3x fa-heart-circle-minus"></i>
-            </button>
+
+          <div
+            class="timer__counter col-12 col-md-4 d-flex justify-content-evenly align-self-center ms-3"
+            style="
+              letter-spacing: 0.2em;
+              color: #4b4d4e;
+              text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.32);
+              font-size: 3.5em;
+            "
+          >
+            <a id="plus" style="cursor: pointer">+</a>
+            <a id="less" style="cursor: pointer">-</a>
+            <div class="timer__number align-self-center"></div>
           </div>
         </div>
-        <nav>
-          <ul class="mobile-nav-hidden ul-mobile-not">
-            <li><a href="#home" class="nav_a">Accueil</a></li>
-            <li>
-              <a href="#group-presentation" class="nav_a"
-                >Presentation</a
-              >
-            </li>
-            <li><a href="#concerts" class="nav_a">Concerts</a></li>
-            <li><a href="#contact" class="nav_a">Contact</a></li>
-          </ul>
-        </nav>
-      </header>
-      <div></div>
-      <section id="home">
-        <div class="carousel">
-          <div class="carousel__imgs">
-            <img src="img/test.webp" alt="" class="current_img first_img" style="object-position: center"/>
-            <img src="img/home5.webp" alt="" class="middle_img" style="object-position: 50% 85%"/>
-            <img src="img/home3.webp" alt="" class="last_img" style="object-position: top"/>
-          </div>
-          <div class="carousel__sliders">
-            <i class="fa-solid fa-chevron-left fa-lg slide"></i>
-            <div class="slider__btn">
-              <button class="slider__active slide"></button>
-              <button class="slide"></button>
-              <button class="slide"></button>
-            </div>
-            <i class="fa-solid fa-chevron-right fa-lg slide"></i>
-          </div>
+      </div>
+      <div class="my-auto h-90">
+        <div
+          class="row d-flex justify-content-center"
+          style="gap: 2rem; width: 100%"
+        >
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded shadow"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
+          <a
+            class="cards col-5 col-sm-3 col-lg-2 rounded p-0 text-decoration-none"
+          >
+            <div class="front w-100 h-100 rounded"></div>
+            <div
+              class="back w-100 h-100 d-flex align-items-center justify-content-center rounded shadow"
+            ></div>
+          </a>
         </div>
-      </section>
-      <section id="group-presentation">
-        <h1>My Little Pony</h1>
-        <div class="group__description">
-          <h2>Notre histoire</h2>
-          <div class="click">
-            <p>CLICK! <br />▼</p>
-          </div>
-          <div class="description__quotes">
-            <div class="quote__poney">
-              <figure class="group__figure figure-right" id="Ruby">
-                <div class="figure__wrap-img">
-                  <img src="img/ruby.webp" alt="Ruby" />
-                </div>
-                <div class="figure__wrap-text figure__text-leaving">
-                  <figcaption>Ruby</figcaption>
-                </div> 
-              </figure>
-              <figure class="quote quote__left ruby">
-                <blockquote>
-                  <p>
-                    "Pendant longtemps, la race des Poneys était divisée en trois
-                    peuples : les Poneys Terrestres, les Pégases et les Licornes.
-                    Nous vivions en harmonie jusqu'à l'arrivée du Mal. Il prit
-                    place dans les coeurs des différents Poneys et le monde ne fut
-                    plus qu'amertume et rancoeur. Cette période est appelée 'Grand
-                    Froid' ".
-                  </p>
-                </blockquote>
-                <figcaption>Ruby - <i>Pégase</i></figcaption>
-              </figure> 
-            </div>
-            <div class="quote__poney">
-              <figure class="group__figure figure-left" id="Hitch">
-                <div class="figure__wrap-img">
-                  <img src="img/hitch.webp" alt="Hitch" />
-                </div>
-                <div class="figure__wrap-text figure__text-leaving">
-                  <figcaption>Hitch</figcaption>
-                </div> 
-              </figure>
-              <figure class="quote quote__right hitch">
-                <blockquote>
-                  <p>
-                    "Mon peuple a une affinitée innée pour ce qui touche à la
-                    terre, nous avons construit de grandes cités et nous nous
-                    sommes perfectionnés dans l'agriculture. Nous ne possédons ni
-                    corne magique, ni ailes et pourtant nous sommes capables de
-                    grandes prouesses physiques. Nous étions en charge de la
-                    distribution de nourriture en Equestria avant Le Grand Froid."
-                  </p>
-                </blockquote>
-                <figcaption>Hitch - <i>Poney Terrestre</i></figcaption>
-              </figure>
-            </div>
-            <div class="quote__poney">
-              <figure class="group__figure figure-right" id="Zipp">
-                <div class="figure__wrap-img">
-                  <img src="img/ZippID__1.webp" alt="Zipp" />
-                </div>
-                <div class="figure__wrap-text figure__text-leaving">
-                  <figcaption>Zipp</figcaption>
-                </div> 
-              </figure>
-              <figure class="quote quote__left zipp">
-                <blockquote>
-                  <p>
-                    "Caractérisés par nos ailes, nous pouvons par conséquent
-                    voler, marcher sur les nuages et certains possèdent la
-                    capacité de contrôler la météo. Jadis nous nous occupions du
-                    maintien de la météo en échange de la nourriture produite par
-                    les poneys terrestres. Malheureusement suite à une vieille
-                    querelle, cet accord fut brisé."
-                  </p>
-                </blockquote>
-                <figcaption>Zipp - <i>Pégase</i></figcaption>
-              </figure>
-            </div>
-            <div class="quote__poney">
-              <figure class="group__figure figure-left" id="Izzy">
-                <div class="figure__wrap-img">
-                  <img src="img/izzy.webp" alt="Izzy" />
-                </div>
-                <div class="figure__wrap-text figure__text-leaving">
-                  <figcaption>Izzy</figcaption>
-                </div>
-              </figure>
-              <figure class="quote quote__right izzy">
-                <blockquote>
-                  <p>
-                    "À la différence des autres peuples, nous sommes capables
-                    grâce à notre corne de lancer des sorts et nous pouvons
-                    effectuer toutes sortes d'autres manipulations à distance.
-                    Grâce à notre incroyable pouvoir nous pouvions aider tous les
-                    peuples. Quand les tensions apparurent il était dangereux de
-                    garder contact avec les Pégases et les Poneys Terrestres en
-                    même temps, nous avions donc décidé de nous isoler."
-                  </p>
-                </blockquote>
-                <figcaption>Izzy - <i>Licorne</i></figcaption>
-              </figure>
-            </div>
-            <div class="quote__poney">
-              <figure class="group__figure figure-right" id="Sunny">
-                <div class="figure__wrap-img">
-                  <img src="img/sunny.webp" alt="Sunny" />
-                </div>
-                <div class="figure__wrap-text figure__text-leaving">
-                  <figcaption>Sunny</figcaption>
-                </div>
-              </figure>
-              <figure class="quote quote__left sunny">
-                <blockquote>
-                  <p>
-                    "Ma grand-mère me parlait de l'avant Grand Froid. Son rêve
-                    était que les trois peuples se réunissent à nouveau et j'ai
-                    partagé ce rêve avec elle en grandissant. Grâce au hasard,
-                    j'ai rencontré Ruby, Hitch, Zipp et Izzy. À cinq, nous avons
-                    décidé de combattre le Mal et de répandre l'amour et le pardon
-                    grâce à nos chansons !"
-                  </p>
-                </blockquote>
-                <figcaption>Sunny - <i>Poney Terrestre</i></figcaption>
-              </figure>
-            </div>
-          </div>
-          <div class="group__video">
-            <iframe width="854" height="480" src="https://www.youtube.com/embed/G2o4xdAIQ5o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-        </div>
-      </section>
-      <section id="concerts">
-        <h2>Nos dates</h2>
-        <div class="concerts__card">
-          <div class="card">
-            <img src="img/Lille.webp" alt="Image de Lille" />
-            <div class="card__city">
-              <h3>Lille</h3>
-            </div>
-            <div class="date lille">
-              <p class="card__date"></p>
-              <p class="card__counter "></p>
-            </div>
-            <button class="card__tickets">Tickets</button>
-          </div>
-          <div class="card ">
-            <img src="img/paris2.webp" alt="Image de Paris" />
-            <div class="card__city">
-              <h3>Paris</h3>
-            </div>
-            <div class="date paris">
-              <p class="card__date"></p>
-              <p class="card__counter"></p>
-            </div>
-            <button class="card__tickets" style="cursor: not-allowed;">Tickets</button>
-            <div >
-              <p class="sold" style="cursor: not-allowed;">
-                SOLD OUT!
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="img/lyon.webp" alt="Image de Lyon" />
-            <div class="card__city">
-              <h3>Lyon</h3>
-            </div>
-            <div class="date lyon">
-              <p class="card__date"></p>
-              <p class="card__counter"></p>
-            </div>
-            <button class="card__tickets">Tickets</button>
-          </div>
-        </div>
-      </section>
-      <section id="contact">
-        <form action="">
-          <input type="text" placeholder="Nom" />
-          <input type="email" placeholder="Email" />
-          <textarea
-          name="message"
-          id="message"
-          cols="30"
-          rows="10"
-          placeholder="Message..."
-          ></textarea>
-          <input type="button" value="Envoyer" />
-        </form>
-        <i class="fa-solid fa-heart top-left fa-5x"></i>
-        <i class="fa-solid fa-heart top-right fa-6x"></i>
-        <i class="fa-solid fa-heart bottom-right fa-4x"></i>
-        <img src="img/bg-2-contact.webp" alt="" class="contact__img">
-      </section>
-      <footer>
-        <div class="licence">Copyright SECRET-PROJECT © 2022</div>
-      </footer>
+      </div>
     </main>
-    <script src="script.js"></script>
+    <footer
+      class="ps-4 d-flex align-items-center"
+      style="background: #4b4d4e; height: 50px; color: #959697; width: 100%"
+    >
+      <div class="licence" style="font-family: Arial, Helvetica, sans-serif">
+        Copyright SECRET-MEMORY © 2022
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script src="game.js"></script>
   </body>
 </html>

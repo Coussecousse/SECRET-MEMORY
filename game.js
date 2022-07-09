@@ -78,7 +78,7 @@ function CardsDistribution() {
     let newTheme;
     do {
       newTheme = SelectTheme();
-      newTheme = themes[newTheme]
+      newTheme = themes[newTheme];
     } while (newTheme == theme);
     theme = newTheme;
   }
@@ -118,8 +118,8 @@ cards.forEach((card) => {
     if (
       listCards.length <= 2 &&
       !card.classList.contains("valid") &&
-      !card.classList.contains("rotate-on")
-      && counter > 0
+      !card.classList.contains("rotate-on") &&
+      counter > 0
     ) {
       turnCards(card);
       if (listCards.length == 2) {
@@ -128,7 +128,7 @@ cards.forEach((card) => {
     }
     //_______ETAPE 4 ________
     //Verifier si toutes les cartes sont retournées :
-    if (counter > 0){
+    if (counter > 0) {
       gameStatus();
     }
   });
@@ -140,16 +140,21 @@ function timerOn() {
 }
 // Enlève 1 au compteur et l'affiche
 function lessCounter() {
+  if (counter == 1) {
+    timerProgress.classList.remove("timer-on");
+    timerProgress.style.width = "0px";
+  }
   if (counter == 0) {
     // Si le timer est à 0, le jeu est perdu:
     winOrLose("Perdu !");
     clearInterval(timerInterval);
-    cards.forEach((card) => 
-    setTimeout(()=> {
-      if (!card.classList.contains("rotate-on")) {
-        turnCards(card);
+    cards.forEach((card) =>
+      setTimeout(() => {
+        if (!card.classList.contains("rotate-on")) {
+          turnCards(card);
         }
-      },200))
+      }, 200)
+    );
   } else {
     counter--;
     timer.innerText = counter + "s";
@@ -173,19 +178,19 @@ function GetCards(card) {
 function turnCards(card) {
   if (card.classList.contains("rotate-off")) {
     // Passer le front devant:
-    card.classList.replace('rotate-off', 'rotate-on');
+    card.classList.replace("rotate-off", "rotate-on");
   } else if (
     card.classList.contains("rotate-on") &&
     !card.classList.contains("valid")
   ) {
     // Si carte en position front (pour passer le back devant)
-    card.classList.replace('rotate-on', 'rotate-off');
+    card.classList.replace("rotate-on", "rotate-off");
     //Enlever l'animation et les bordures :
     card.classList.remove("unvalid");
     card.classList.remove("border", "border-danger", "border-2");
   } else {
     // Si c'est la première fois que les cartes sont retournées donc il n'y a pas de flipper-front-off sur les cartes :
-    card.classList.add('rotate-on');
+    card.classList.add("rotate-on");
   }
 }
 
@@ -275,27 +280,35 @@ function winOrLose(text) {
 const playAgain = document.querySelector("#play-again");
 
 playAgain.addEventListener("click", () => {
-  playAgainFunction();
+  const spin = playAgain.children[0];
+  spin.classList.add("fa-spin");
+  setTimeout(playAgainFunction, 700, spin);
+  // playAgainFunction(spin);
 });
 
-function playAgainFunction() {
+function playAgainFunction(spin) {
   setTimeout(CardsDistribution, 800);
-  cards.forEach((card) => {
-    let front = card.children[0];
-    let back = card.children[1];
-    if (!card.classList.contains("rotate-off")) {
-      card.classList.replace('rotate-on', 'rotate-off')
-      card.classList.remove("valid");
-      back.classList.remove("border", "border-success", "border-2");
-    }
-  });
+  // setTimeout(resetCards, 700,spin);
+  resetCards(spin);
   resetVar();
+  // setTimeout(resetVar, 900);
+}
+function resetCards(spin) {
+  cards.forEach((card) => {
+    console.log("je suis ici");
+    if (!card.classList.contains("rotate-off")) {
+      card.classList.replace("rotate-on", "rotate-off");
+      card.classList.remove("valid");
+      card.classList.remove("border", "border-success", "border-2");
+    }
+    spin.classList.remove("fa-spin");
+  });
 }
 function resetVar() {
   clearInterval(timerInterval);
   listCards = [];
   firstCardClick = true;
-  if (difficulty.classList.contains("easy")) {
+  if (!difficulty.classList.contains("difficult")) {
     counter = 60;
   } else {
     counter = 30;
@@ -309,21 +322,28 @@ function resetVar() {
 // ETAPE BONUS :
 // Ajouter un niveau de difficulté
 
-const difficulty = document.querySelector("#difficulty");
+const difficulty = document.querySelector(".timer__counter");
 
-difficulty.addEventListener("click", () => {
+difficulty.addEventListener("click", (e) => {
+  const selectedDiff = e.target.closest("a");
+  const plus = document.querySelector("#plus");
+  const less = document.querySelector("#less");
+
   // On ne peut pas changer le temps si le jeu est lancé
+  if (!selectedDiff) return;
+
   if (counter == 60 || counter == 30) {
-    if (difficulty.classList.contains("easy")) {
-      counter = 30;
-      timer.textContent = counter + "s";
-      difficulty.classList.replace("easy", "difficult");
-      document.documentElement.style.setProperty("--timer", "30s");
-    } else {
+    if (selectedDiff == plus) {
       counter = 60;
       timer.textContent = counter + "s";
-      difficulty.classList.replace("difficul", "easy");
+      difficulty.classList.replace("easy", "difficult");
       document.documentElement.style.setProperty("--timer", "60s");
+    } else if (selectedDiff == less) {
+      counter = 30;
+      timer.textContent = counter + "s";
+      difficulty.classList.replace("difficul", "easy");
+      document.documentElement.style.setProperty("--timer", "30s");
+      difficulty.classList.add("difficult");
     }
   }
 });
